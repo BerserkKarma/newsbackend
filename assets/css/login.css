@@ -42,13 +42,15 @@ body {
 
 .layui-form-item {
     position: relative;
-}
-
-.layui-icon {
+  }
+  
+  .layui-icon {
     position: absolute;
     left: 10px;
     top: 10px;
-}
-.layui-input {
+  }
+  
+  .layui-input {
     padding-left: 32px;
-}
+  }
+  
