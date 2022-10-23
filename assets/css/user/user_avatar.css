@@ -1,0 +1,63 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 15px;
+    background-color: #f2f3f5;
+}
+
+/* 设置卡片主体区域宽度 */
+.layui-card-body {
+    width: 500px;
+}
+/* 设置按钮行样式 */
+.row2 {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+/* 设置裁剪区域样式 */
+.cropper-box {
+    width: 350px;
+    height: 350px;
+    background-color: coral;
+    overflow: hidden;
+}
+/* 第一预览区样式 */
+.w100 {
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+}
+/* 第二预览区样式 */
+.w50 {
+    width: 50px;
+    height: 50px;
+    background-color: gray;
+    margin-top: 50px;
+}
+/* 设置预览区下方文本 */
+.size {
+    font-size: 12px;
+    color: gray;
+    text-align: center;
+}
+/* 设置图片行的样式 */
+.row1{
+    display: flex;
+}
+/* 设置preview-box区域的样式 */
+.preview-box {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+}
+设置img-preview区域的样式
+.img-preview {
+    overflow: hidden;
+    border-radius: 50%;
+}
