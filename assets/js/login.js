@@ -59,7 +59,7 @@ $(function () {
             url: "/api/login",
             data: $(this).serialize(),
             success: function (response) {
-                if(res.status !==0) {
+                if(response.status !==0) {
                     return layer.msg('登录失败！')
                 }
                 layer.msg('登录成功！')
