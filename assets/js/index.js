@@ -42,7 +42,7 @@ $('#btnLoginout').on('click', function () {
         //清空本地token
         localStorage.removeItem('token')
         //重新跳转登录页面
-        location.href = '/login.html'
+        location.href = 'login.html'
 
         //关闭confirm框
         layer.close(index)

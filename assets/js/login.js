@@ -57,13 +57,14 @@ $(function () {
         $.ajax({
             method: "POST",
             url: "/api/login",
-            data: $(this).serialize(),
+            //使用serialize()函数快速获取表单中的数据
+            data: $(this).serialize(),  //this指向id为form_login的表单对象
             success: function (response) {
                 if(response.status !==0) {
                     return layer.msg('登录失败！')
                 }
                 layer.msg('登录成功！')
-                //JWT
+                //登录成功的token值存在本地存储中
                 localStorage.setItem('token',res.token)
                 //后台主页跳转
                 location.href = '/index.html'
