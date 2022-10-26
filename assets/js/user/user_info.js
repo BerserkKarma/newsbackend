@@ -12,7 +12,7 @@ $(function () {
 })
 
 initUserInfo()
-//初始化用户基本信息的哦函数
+//初始化用户基本信息的函数
 function initUserInfo() {
     $.ajax({
         method: "GET",
@@ -22,11 +22,13 @@ function initUserInfo() {
                 return layer.msg('获取用户信息失败！')
             }
             console.log(response)
+            //ajax获取用户信息后，使用form.val()方法填充表单
+            //调用form.val为表单赋值 
+            form.val('formUserInfo', res.data)
         }
     });
 }
-//调用form.val为表单赋值 
-form.val('formUserInfo', res.data)
+
 //表单重置
 $('#btnReset').on('click', function (e) {
     //阻止默认行为
@@ -44,11 +46,11 @@ $(".layui-form").on('submit', function (e) {
         url: "/my/userinfo",
         data: $(this).serialize(),
         success: function (response) {
-            if(response.status !==0) {
+            if (response.status !== 0) {
                 return layer.msg('更新用户信息失败！')
             }
             layer.msg('更新用户信息成功！')
-            //调用父页面的方法，重新渲染用户的头像和用户信息
+            //调用父页面的getUserInfo()方法，重新渲染用户的头像和用户信息
             window.parent.getUserInfo()
         }
     });

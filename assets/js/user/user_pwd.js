@@ -27,7 +27,7 @@ $(function () {
                     return layui.layer.msg('更新密码失败！')
                 }
                 layui.layer.msg('更新密码成功！')
-                //重置表单
+                //重置表单,通过索引形式把jq对象转化成原生js对象
                 $('.layui-form')[0].reset()
             }
         });
