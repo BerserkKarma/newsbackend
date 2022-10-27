@@ -9,6 +9,7 @@ $(function () {
             type: "GET",
             url: "/my/article/cates",
             success: function (response) {
+                //使用模板引擎进行渲染
                 var htmlStr = template("tpl-table", response);
                 $("tbody").html(htmlStr);
             },
