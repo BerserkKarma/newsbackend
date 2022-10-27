@@ -18,7 +18,7 @@ $(function () {
     })
     //文件选择框绑定change事件，上传图片执行剪裁
     $('#file').on('change', function (e) {
-        //获取用户选择的文件
+        //事件对象的target属性中files子属性代表文件伪数组
         var filelist = e.target.files
         if (filelist.length === 0) {
             return layer.msg('请选择照片！')
