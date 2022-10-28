@@ -16,12 +16,12 @@ $(function () {
         });
     }
     // 一、添加文章分类的功能
-    //预先保存弹出层的索引
+    //预先保存弹出层的索引，layui提供的功能，layer.open方法会返回一个索引值，使用indexAdd接收
     var indexAdd = null
     //使用layer.open实现弹出层效果
     //给添加类别按钮绑定点击事件
     $("#btnAddCate").on("click", function () {
-        layer.open({
+        indexAdd = layer.open({
             type: 1,
             area: ["500px", "250px"],
             title: " 添加文章分类",
@@ -29,7 +29,7 @@ $(function () {
             content: $('#dialog-add').html(),
         });
     });
-    //通过事件代理的形式，为form-add表单绑定submit事件
+    //弹出层表单由js生成，在未点击添加分类按钮前，直接绑定submit事件时id为#form-add的表单在页面不存在，故采用事件委托方法使表单的submit事件冒泡到body上
     $('body').on('submit', '#form-add', function (e) {
         e.preventDefault()
         $.ajax({
@@ -48,8 +48,9 @@ $(function () {
         });
     });
     //二、点击编辑按钮弹出修改文章分类的编辑层
+    // 初始化layer.open索引
     var indexEdit = null
-    // 事件委托，编辑按钮绑定事件
+    // 多次重复的编辑按钮点击事件，使用事件委托节省资源
     $('tbody').on('click', '.btn-edit', function () {
         //弹出修改文章分类信息的层
         indexEdit = layer.open({
@@ -60,7 +61,7 @@ $(function () {
             content: $('#dialog-edit').html()
         })
         //为修改文章分类的编辑层填充表单数据
-        //弹出层ok后，根据id值发起请求获取文章数据，然后填充进表单中
+        //弹出层中，根据所点击的栏目id值发起请求获取文章数据，然后填充进表单中
         var id = $(this).attr('data-id')
         //发起请求获取对应分类的数据,填充
         $.ajax({
@@ -72,13 +73,13 @@ $(function () {
         });
     });
     //更新文章分类数据
-    //事件委托，绑定submit事件 
+    //与上述#form-add使用事件委托的原因一致
     $('tbody').on('submit', '#form-edit', function (e) {
         //阻止默认行为
         e.preventDefault()
         //发起请求修改文章分类
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "/my/artile/updatecate",
             data: $(this).serialize(),
             success: function (response) {
