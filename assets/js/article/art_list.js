@@ -1,7 +1,10 @@
 $(function () {
     var layer = layui.layer
+    // 为form重新渲染机制做准备
     var form = layui.form
-    //定义查询参数对象q
+    //layui分页所需要的laypage对象导出
+    var laypage = layui.page
+    //定义查询参数对象q，请求数据时便于发送给服务器，此处设置为默认值
     var q = {
         pagenum: 1,  //页码值，默认请求第一页数据
         pagesize: 2, //每页显示几条数据，默认每页显示2条
@@ -10,6 +13,7 @@ $(function () {
     }
     //获取文章列表数据的函数
     initTable()
+    //定义获取文章列表数据函数
     function initTable() {
         $.ajax({
             type: "GET",
@@ -27,7 +31,7 @@ $(function () {
             }
         });
     }
-    //定义美化时间的过滤器
+    //定义美化时间的过滤器，art-template自带
     template.defaults.imports.dataFormat = function (date) {
         const dt = new Date(date)
         var y = dt.getFullYear
@@ -40,7 +44,7 @@ $(function () {
 
         return y + '-' + m + '-' + d + ' ' + hh + ':' + mm + ':' + ss
     }
-    //定义补零的函数
+    //定义补零的函数，美化补零
     function padZero(n) {
         return n > 9 ? n : '0' + n
     }
@@ -58,7 +62,8 @@ $(function () {
                 //调用模板引擎渲染分类可选项
                 var htmlStr = template('tpl-cate', response)
                 $('[name=cate_id]').html(htmlStr)
-                //通过layui重新渲染表单区域的UI的结构
+                //异步ajax请求后，通过layui重新渲染表单区域的UI的结构
+                //自带render()方法
                 form.render()
             }
         });
@@ -77,8 +82,8 @@ $(function () {
     });
     //渲染分页的函数定义
     function renderPage(total) {
-        // console.log(total)
-        //调用laypage方法渲染分页结构
+        // 服务器返回的数据中有关于文章总数的total属性，根据此进行分页计算
+        //使用layui的laypage方法渲染分页结构
         laypage.render({
             elem: 'pageBox',      //分页容器的id
             count: total,         //总数据条数
