@@ -89,8 +89,8 @@ $(function () {
             count: total,         //总数据条数
             limit: q.pagesize,    //每页显示几条数据
             curr: q.pagenum,     // 设置默认被选中的分页
-            layout: ['count', 'limit', 'prev', 'page', 'next', 'skip'],
-            limits: [2, 3, 5, 10],
+            layout: ['count', 'limit', 'prev', 'page', 'next', 'skip'],  // 根据layui文档按顺序添加不同功能
+            limits: [2, 3, 5, 10],    //其中'prev', 'page', 'next'是基础功能，count为总数功能，limit为限制每页数目显示功能，skip为跳转功能
             //分页发生切换的时候，触发jump回调
             // 触发 jump 回调的方式有两种：
             // 1. 点击页码的时候，会触发 jump 回调
@@ -101,9 +101,9 @@ $(function () {
                 // 否则就是方式1触发的
                 console.log(first)
                 console.log(obj.curr)
-                //最新的页码值赋值给查询参数对象q中
+                //最新的页码值jump回调函数中obj对象的curr属性(代表当前页面值，即pagenum)赋值给查询参数对象q中
                 q.pagenum = obj.curr
-                // 把最新的条目数，赋值到 q 这个查询参数对象的 pagesize 属性中
+                //最新的页码值jump回调函数中obj对象的limit属性(代表当前限制条目值，即pagesize)赋值到 q 这个查询参数对象的 pagesize 属性中
                 q.pagesize = obj.limit
                 //根据最新的q获取对应的数据列表，并渲染表格
                 if (!first) {
